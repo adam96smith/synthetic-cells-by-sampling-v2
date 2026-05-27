@@ -1,0 +1,25 @@
+# YAML for global parameters used in majority of code (loaded by default)
+
+#### GUIDE ####
+# SAMPLING - list - Sampling Rate in z, x, y
+# IGNORE_SAMPLERS - list - list of samplers to ignore (artefacts or missed
+#                          annotations that might cause problems)
+
+# SAMPLER - Parameters for Sampling
+#    DISABLE_LABELS - bool - If True, do not sample cells independently
+#    SILVER_TRUTH - bool - If True, use silver truth labels for sampling (not recommended)
+#    MIN_DIST - int - Minimum internal distance to sample
+#    MAX_DIST - int - Maximum external distance to sample
+#    DX - int - Bin size for distances
+###############
+
+SAMPLING: [1.0, 0.126, 0.126]
+IGNORE_SAMPLERS: []
+
+SAMPLER:
+    DISABLE_LABELS: False
+    NORMALISE: False
+    SILVER_TRUTH: False
+    MIN_DIST: -5.0
+    MAX_DIST: 5.0
+    DX: 0.5

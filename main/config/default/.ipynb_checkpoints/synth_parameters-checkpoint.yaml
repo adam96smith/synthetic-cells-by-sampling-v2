@@ -1,0 +1,56 @@
+############################ SYNTH - Parameters for Synthetic Images ############################
+### Shape ###
+#    IMAGE_SIZE - list - Synthetic image size in pixels
+#    DOWNSAMPLE - int - Scale factor for downsampling in x-y plane (critical for memory)
+#                       Note: This does not impact the size of the outputed image.
+#    CELL_N (*) - int or list - Number of cells in synthetic images (list indicates a range)
+#    CELL_R (*) - list - range of cell radii (in mu)
+#    Z_SCALE (*) - float - scale the distances in z; flatten (<1) or elongate (>1) shapes.
+
+#    CELL_SEPARATION (*) - int - Miniumum distance between sampled cells
+#    CELL_COUPLING_CHANCE - float - probability that a sampled cell will touch another
+
+#    DEFORM_1 - list or none - Large-scale shape deform params [grid points, strength]
+#    DEFORM_2 - list or none - Small-Scale shape deform params [grid points, strength]
+
+### Sampling ###
+#    DISTMAP_BLUR (**) - bool - if True, blur distance map
+#    DISTMAP_SIG (**) - float - scale of distance map blur 
+#    GAUSSIAN_BLUR (**) - bool - if True, blur final image
+#    GAUSSIAN_SIG (**) - float or list - scale of final image blur
+
+### Augmentation ###
+#    WARP_DIST_P - float - probability of warping distance map before sampling
+#    WARP_DIST_A - float - Amplitude of warping distance map before sampling
+#    WARP_NORM_P - float - probability of warping fluorescence after sampling
+#    WARP_NORM_A - float - Amplitude of warping fluorescence after sampling
+
+# (*) - values should be based on original data. The values are scaled with respect to DOWNSAMPLE
+# (**) - parameters for Fluorecent Sampler
+#################################################################################################
+
+SHAPE:
+    IMAGE_SIZE: [32, 256, 256]
+    DOWNSAMPLE: 1
+    CELL_N: [1,4]
+    CELL_R: [4,6]
+    Z_SCALE: 1
+    CELL_SEPARATION: 1
+    CELL_COUPLING_CHANCE: 0.0
+    DEFORM_1: [4, 0.05]
+    DEFORM_2: [16, 0.025]
+
+SAMPLER:
+    DISTMAP_BLUR: True
+    DISTMAP_SIG: .1
+    PARTITION_JITTER: 1
+    GAUSSIAN_BLUR: False
+    GAUSSIAN_SIG: .1
+    NORMALISE: False
+
+AUGMENTATION:
+    WARP_DIST_P: 0.0
+    WARP_DIST_A: 0.0
+    WARP_NORM_P: 0.0
+    WARP_NORM_A: 0.0
+    

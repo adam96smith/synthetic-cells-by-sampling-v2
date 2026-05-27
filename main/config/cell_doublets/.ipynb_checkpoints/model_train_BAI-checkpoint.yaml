@@ -1,0 +1,60 @@
+### GUIDE ###
+
+## Training
+#   EPOCHS - int - Number of training epochs between validation. An epoch is 1x patch sampled from 1x training image.
+#   BATCH_SIZE - int
+#   PATCH_SHAPE - list - Size of patch to sample from e=image each EPOCH
+#   MAX_STEPS - int - Max. number of EPOCHs to train model
+#   LOSS_CODE - str - Loss function code eg. '100CE', '50DL-50CE' '100CWL'
+#   WEIGHTS - list - Regional weights in corresponding loss funciton
+#   WARP_PROB - float - Probability of augmenting sample
+
+## Evaluation
+#   STEP_SIZE - int - Interval to evaluate model against labelled data 
+#   BURN_IN - int - Burn-in time before evaluating model
+#   EVAL_DIR - str - Directory with labelled data
+#   EVAL_TYPE - str - Indication to 'maximise' or 'minimise' some metric
+#   EVAL_TARGET - float - Target metric based on EVAL_TYPE
+#   EVAL_PATIENCE - int - Number of STEP_SIZE to wait until no improvement is seen
+#   EVAL_SCALE - int - Scale factor between training and test data (see synth_parameters.yaml)
+#   EVAL_LABEL - str - Evaluate on ground truth 'GT' or silver truth 'ST'
+
+## Filtering - apply to each sample
+#   Z_MED_FILTER - list - If [1,1,1], no median filter applied
+#   CONV_Z  - list -  if [0, 1], no convolution applied
+
+
+training:
+  EPOCHS: 100
+  BATCH_SIZE: 2
+  PATCH_SHAPE: [32, 64, 64]
+  MAX_STEPS: 25000
+  LOSS_CODE: '100CE'
+  WEIGHTS: [.2,.8]
+  WARP_PROB: 0.5
+
+evaluation:
+  STEP_SIZE: 200
+  BURN_IN: 1000
+  EVAL_DATA: 'CTC'
+  EVAL_TYPE: 'maximise'
+  EVAL_TARGET: 0.95
+  EVAL_PATIENCE: 10
+  EVAL_SCALE: 2
+  EVAL_ID: 'default'
+
+model:
+  OUT_CHANNELS: 1
+  KERNEL_SIZE: 3
+  N_BLOCKS: 5
+  START_FILTS: 32
+  PLANAR_BLOCKS: [0]
+  RESUME: '-'
+
+filtering:
+  Z_MED_FILTER: [1,1,1]
+  CONV_Z: [0, 1]
+
+
+
+  
