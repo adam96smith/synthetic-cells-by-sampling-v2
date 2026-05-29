@@ -140,7 +140,7 @@ for n in tqdm(range(N), desc='Sampling fluorescence'):
         zs = int(zs_lab[:2].lstrip('0') + zs_lab[-1]) # z slice
 
         # load data
-        image = imread(f'{data_path}{cell}/t{t_lab}.tif')[zs]
+        image = imread(f'{data_path}{cell}/t{t_lab}.tif')
         try:
             mask = imread(f'{data_path}{cell}_{label_type}/SEG/man_seg{t_lab}_{zs_lab}.tif') # integer array for multiple cells
         except:
@@ -150,6 +150,8 @@ for n in tqdm(range(N), desc='Sampling fluorescence'):
             q_01 = np.quantile(image, .01)
             q_99 = np.quantile(image, .99)
             image = (image-q_01)/(q_99-q_01)
+
+        image = image[zs]
 
         # ensure labelling 0, 1, 2 .. with no gaps!
         labelled_mask = np.zeros_like(mask)
